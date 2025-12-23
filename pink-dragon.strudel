@@ -10,14 +10,14 @@
 setcpm(128/4)
 
 stack(
-  sound("[bd [hh ~ bd ~] bd [hh ~ ~ ~]]"),
+  //sound("[bd [hh ~ bd ~] bd [hh ~ ~ ~]]"),
 
   note(`<
-    [g2]
-    [d2]
-    [c2]
-    [c2]
-  >`).gain(1.5),
+    [g2 [~ ~ g1 ~] g2 ~]
+    [d2 [~ ~ d1 ~] d2 ~]
+    [c2 [~ ~ c1 ~] c2 ~]
+    [c2 [~ ~ c1 ~] c2 ~]
+  >`).sound("saw").gain(1.1),
   
   note(`<
     [g3 d4 b3 d4 g3 d3 b3 d3]
