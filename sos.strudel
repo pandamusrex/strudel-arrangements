@@ -1,0 +1,41 @@
+//  ____                 _                           ____           
+// |  _ \ __ _ _ __   __| | __ _ _ __ ___  _   _ ___|  _ \ _____  __
+// | |_) / _` | '_ \ / _` |/ _` | '_ ` _ \| | | / __| |_) / _ \ \/ /
+// |  __/ (_| | | | | (_| | (_| | | | | | | |_| \__ \  _ <  __/>  < 
+// |_|   \__,_|_| |_|\__,_|\__,_|_| |_| |_|\__,_|___/_| \_\___/_/\_\
+
+// Song: SOS
+// Artist: PandamusRex
+
+setcpm(124/4)
+
+$:sound(`[bd spacedrum_bd ~ bd | spacedrum_bd]`)
+  .lpf(500)
+  .gain(0)
+
+$:n(`[0,3,5,3] | [3,3,5,5] | [5,3,0,0] `)
+  .scale("<c#:minor c#:minor a:major a:major>")
+  .arp("[0 1 2 3]")
+  .sound("gm_voice_oohs | piano | vibraphone_soft")
+  .gain(0)
+
+$:note(`<[[c#4 c#4] [c#4 ~] ~ ~] [c#4 c#4 c#4 ~] [[c#4 c#4] [c#4 ~] ~ ~] ~>`)
+  .transpose(12)
+  .sound("sine")
+  .gain(0.3)
+
+$:n("0")
+  .scale("<c#:minor c#:minor a:major a:major>")
+  .sound("gm_seashore:12?0.6, gm_seashore:9?0.8, gm_seashore:13?0.8, [gm_bird_tweet:3?0.9 sine?]")
+  .lpf(slider(2133, 0, 3000))
+  .gain(0)
+
+$:n(`[0,3,5]`)
+  .scale("<c#:minor c#:minor a:major a:major>")
+  .sound("sine, supersaw, supersaw?")
+  .detune(.6)
+  .lpf(slider(1042.2,0,1800))
+  .room(.6)
+  .gain(0)
+  .color("purple")
+  .scope({thickness:12})
