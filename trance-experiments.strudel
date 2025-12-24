@@ -1,0 +1,74 @@
+//  ____                 _                           ____           
+// |  _ \ __ _ _ __   __| | __ _ _ __ ___  _   _ ___|  _ \ _____  __
+// | |_) / _` | '_ \ / _` |/ _` | '_ ` _ \| | | / __| |_) / _ \ \/ /
+// |  __/ (_| | | | | (_| | (_| | | | | | | |_| \__ \  _ <  __/>  < 
+// |_|   \__,_|_| |_|\__,_|\__,_|_| |_| |_|\__,_|___/_| \_\___/_/\_\
+
+// Song: Trance Experiements
+// Artist: PandamusRex
+
+// fill and trancegate props Switch Angel
+// https://github.com/switchangel/strudel-scripts
+
+register('fill', function (pat) {
+  return new Pattern(function (state) {
+    const lookbothways = 1;
+    // Expand the query window
+    const haps = pat.query(state.withSpan(span => new TimeSpan(span.begin.sub(lookbothways), span.end.add(lookbothways))));
+    const onsets = haps.map(hap => hap.whole.begin)
+      // sort fractions
+      .sort((a, b) => a.compare(b))
+      // make unique
+      .filter((x, i, arr) => i == (arr.length - 1) || x.ne(arr[i + 1]));
+    const newHaps = [];
+    for (const hap of haps) {
+      // Ingore if the part starts after the original query
+      if (hap.part.begin.gte(state.span.end)) {
+        continue;
+      }
+
+      // Find the next onset, to use as an offset
+      const next = onsets.find(onset => onset.gte(hap.whole.end));
+
+      // Ignore if the part ended before the original query, and hasn't expanded inside
+      if (next.lte(state.span.begin)) {
+        continue;
+      }
+
+      const whole = new TimeSpan(hap.whole.begin, next);
+      // Constrain part to original query
+      const part = new TimeSpan(hap.part.begin.max(state.span.begin), next.min(state.span.end));
+      newHaps.push(new Hap(whole, part, hap.value, hap.context, hap.stateful));
+    }
+    return newHaps;
+  });
+});
+
+register('trancegate', (density, seed, length, x) => {
+  return x.struct(rand.mul(density).round().seg(16).rib(seed, length)).fill().clip(.7)
+})
+
+setcpm(130/4)
+
+$: sound("[bd bd] [~] [bd bd] [~], hh*8").bank('rolandtr808').gain(0.3)
+
+$: sound("rolandtr909_bd*4")
+
+$: sound("ace_oh*16").gain(0.3).phaser(0.125)
+
+$: sound("<[wind ~ ~ [~ wind]] [wind ~ ~ ~]>").gain(0.3)
+
+$: note(`<
+    [e1 e1 ~ [~ e1]]
+    [e1 e1 ~ [~ e1]]
+    [c1 c1 ~ [~ c1]]
+    [c1 c1 ~ [~ c1]]
+  >`)
+  .transpose(24)
+  .sound("tri")
+  
+
+$: n("0".add(-12))
+  .scale("a:minor")
+  .s("supersaw")
+  .trancegate(1.5,45,1)
