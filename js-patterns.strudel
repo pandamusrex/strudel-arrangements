@@ -1,0 +1,29 @@
+//  ____                 _                           ____           
+// |  _ \ __ _ _ __   __| | __ _ _ __ ___  _   _ ___|  _ \ _____  __
+// | |_) / _` | '_ \ / _` |/ _` | '_ ` _ \| | | / __| |_) / _ \ \/ /
+// |  __/ (_| | | | | (_| | (_| | | | | | | |_| \__ \  _ <  __/>  < 
+// |_|   \__,_|_| |_|\__,_|\__,_|_| |_| |_|\__,_|___/_| \_\___/_/\_\
+
+setcpm(128/4)
+
+const gain1 = () => slider(0.323);
+const gain2 = () => slider(0.741);
+
+stack(
+  sound("[anvil ~ ~ ~]").gain(gain1()),
+  sound("[numbers:1 numbers:2 numbers:3 numbers:4]/4").gain(gain1()),
+
+  sound("[[bd bd] ~ ~ ~]").bank("rolandcompurhythm1000").lpf(1000).gain(gain2()),
+  sound("[hh]*16").gain(gain2()),
+  sound("[bd]*4").bank("rolandtr909").gain(gain2()),
+
+  sound("tri").gain(slider(0,0,1)),
+  note("[e3 g3 e3 b3 e3 g3 e3 b3]").sound("tri").gain(slider(0,0,1)),
+
+  note("[[e1 e1] ~ ~ ~]").sound("saw").gain(slider(0.007,0,1)),
+
+  note(`<
+  [e2 ~ e2 ~ e2 ~ e2 ~]
+  [e1 ~ e1 ~ e1 ~ e1 ~]
+  >`).sound("supersaw").gain(slider(0,0,1))
+).scope()
