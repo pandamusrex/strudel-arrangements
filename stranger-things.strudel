@@ -34,8 +34,8 @@ stack(
   //   0.75
   // Auto filter
   //   Raise and lower band pass every 8 bars/cycles
-  note(`[c2 e2 g2 b2 c3 b2 g2 e2]*2`).transpose(12),
-  // *2 = repeat arpeggio twice per bar/cycle aka 16th notes
+  note(`[c3 e3 g3 b3 c4 b3 g3 e3]*2`).sound("tri"),
+  // *2 = speed up to repeat the 8 notes in the arpeggio cycle twice per bar/cycle aka 16th notes
 
   //s("[hh ~ ~ ~]"),
   
@@ -53,13 +53,17 @@ stack(
   // C:major (2 bars)
   // E:minor (2 bars)
   // Roland Juno-106
-  note(`<[c2,e2,g2] _ [e2,g2,b2] _>`).transpose(12).sound("gm_pad_warm").gain(0.3),
+  note(`<[c3,e3,g3] _ [e3,g3,b3] _>`).sound("gm_pad_warm").gain(0.5),
   // rock back and forth
+  // sequence of 4 elements (4 cycles)
   // use <> to have the sequence length defined by the number of elements (4)
 
   // Bass
   // Roland SH-2
-  //note(`<[] >)
+  // Four bars/cycles long
+  note(`<c2@7 d2 e2@7 d2>*4`).sound("gm_lead_8_bass_lead").gain(0.5)
+  // 4 elements in the sequence
+  // *4 = speed up to repeat the 16 notes in the bass line so they take just 4 bars/cycles to play
 )
 .room(1)
 .scope()
