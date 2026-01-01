@@ -6,6 +6,8 @@
 
 // Trance Crows
 
+await initHydra({feedStrudel:1})
+
 register('fill', function (pat) {
   return new Pattern(function (state) {
     const lookbothways = 1;
@@ -46,14 +48,25 @@ register('trancegate', (density, seed, length, x) => {
 
 setcpm(130/4)
 
-_$hh: sound("[hh [hh ~ ~ hh] hh hh]")
+src(s0).kaleid(H("<4 5 6>"))
+.diff(osc(1,0.5,5))
+.modulateScale(osc(2,-0.25,1))
+.out()
 
-_$bd:  sound("[bd bd bd bd]")
+$hh: sound("[hh [hh ~ ~ hh] hh hh]")
 
-_$hh2: sound("hh*16")
+$bd:  sound("[bd bd bd bd]")
 
-_$crow: sound("crow").trancegate(1.5,45,1).gain("0 | 1")
+$hh2: sound("hh*16")
 
-_$bass: note("[0 0 ~ ~] ~ ~ ~").scale("e:minor").transpose(-12).sound("supersaw").gain(2)
+$crow: sound("crow").trancegate(1.5,45,1).gain("0 | 1")
 
-_$pad: note("0,4,7").scale("e:minor").sound("saw").transpose("-12 | -7").gain(0.5).trancegate(1.5,45,1)
+$bass: note("[0 0 ~ ~] ~ ~ ~").scale("e:minor").transpose(-12).sound("supersaw").gain(2)
+
+$pad: note("0,4,7").scale("e:minor").sound("saw").transpose("-12 | -7 | -6 | -5").gain(0.5).trancegate(1.5,45,1)
+
+$bd2: sound("bd").trancegate(1,15,1)
+
+$newnote: note("[-12 0 -12 0]*2").scale("e:minor").sound("supersaw").gain(1)
+
+all(x=>x.fft(4).scope({pos:0,smear:.95}))
