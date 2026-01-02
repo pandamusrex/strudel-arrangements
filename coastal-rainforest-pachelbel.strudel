@@ -1,0 +1,41 @@
+//  ____                 _                           ____           
+// |  _ \ __ _ _ __   __| | __ _ _ __ ___  _   _ ___|  _ \ _____  __
+// | |_) / _` | '_ \ / _` |/ _` | '_ ` _ \| | | / __| |_) / _ \ \/ /
+// |  __/ (_| | | | | (_| | (_| | | | | | | |_| \__ \  _ <  __/>  < 
+// |_|   \__,_|_| |_|\__,_|\__,_|_| |_| |_|\__,_|___/_| \_\___/_/\_\
+
+// Coastal Rainforest Pachelbel
+
+setcpm(108/4)
+
+// In the Strudel programming language for algorithmic music, note and n both
+// refer to musical pitches but note() is the primary function for specifying
+// notes (names like 'c', 'g') or numbers, while n can be used for notes but
+// often causes confusion and is better reserved for sample selection, with
+// developers encouraged to use note() for pitches
+
+$core: n("0 2 4 2")
+  .chord("<D A Bm F#m G D G A>")
+  .voicing()
+  .attack(0.1)
+  .sound("sine")
+  .clip("4 3 2 1")
+  .lpf(2000)
+  .room(0.5)
+  .gain(0.2)
+
+$lead: note("<f#3 e3 d3 c#3 b2 a2 b2 c#3>")
+  .sound("gm_synth_bass_2")
+  .lpf(400)
+  .room(0.5)
+
+$ocean: n("0")
+  .sound("gm_seashore")
+  .gain("1 | 2 | 4")
+  .slow(4)
+  .room(2)
+  .lpf(4000)
+
+$birds: n("0 | 1 | 2 | 3 | 4 | 5 | ~ | ~")
+  .sound("gm_bird_tweet")
+  .gain(0.2)
