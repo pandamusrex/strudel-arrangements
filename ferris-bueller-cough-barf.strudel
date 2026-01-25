@@ -1,0 +1,25 @@
+//  ____                 _                           ____           
+// |  _ \ __ _ _ __   __| | __ _ _ __ ___  _   _ ___|  _ \ _____  __
+// | |_) / _` | '_ \ / _` |/ _` | '_ ` _ \| | | / __| |_) / _ \ \/ /
+// |  __/ (_| | | | | (_| | (_| | | | | | | |_| \__ \  _ <  __/>  < 
+// |_|   \__,_|_| |_|\__,_|\__,_|_| |_| |_|\__,_|___/_| \_\___/_/\_\
+
+// Bueller? Bueller? Anyone? 
+
+setcpm(200/4)
+
+samples('github:pandamusrex/strudel-samples/master/strudel.json?version=105')
+
+$samples1: note(`<
+  [b1 b1 d#2]
+  [f#2 f#2 ~]
+  [d2 d2 ~]
+  [b1 b1 ~]
+  >`)
+  .s(`<
+    [ferris-bueller:1]
+    [ferris-bueller:1]
+    [ferris-bueller:0]
+    [ferris-bueller:0]
+  >`)
+  .gain(0.8)
