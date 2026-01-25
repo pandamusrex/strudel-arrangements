@@ -35,7 +35,7 @@ $osc: note(`<
   .sound("saw")
   .attack(0.1)
   .decay(0.2)
-  .sustain(0,7)
+  .sustain(0.3)
   .release(0.05)
   .lpf(6000)
   .pan("[0.2 0.8 0.2 0.8 0.2 0.8 0.2 0.8]")
